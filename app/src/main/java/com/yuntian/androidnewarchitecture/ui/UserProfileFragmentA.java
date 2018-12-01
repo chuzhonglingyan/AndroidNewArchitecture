@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -68,11 +66,8 @@ public class UserProfileFragmentA extends BaseFragment implements IView {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
-
-        return inflater.inflate(R.layout.user_profile, container, false);
+    protected int getLayoutId() {
+        return R.layout.user_profile;
     }
 
 
@@ -99,12 +94,10 @@ public class UserProfileFragmentA extends BaseFragment implements IView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         if (getArguments() != null) {
             userId = getArguments().getString(UID_KEY);
             viewModel.init("octocat");
         }
-
     }
 
     @Override

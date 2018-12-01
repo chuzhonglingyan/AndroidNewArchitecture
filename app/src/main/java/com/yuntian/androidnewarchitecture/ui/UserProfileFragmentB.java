@@ -51,13 +51,6 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
     }
 
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: " + context);
-    }
-
     @Override
     public void inject(AppComponent appComponent) {
         DaggerUserComponent.builder()
@@ -67,35 +60,25 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
                 .inject(this);
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
-
-        return inflater.inflate(R.layout.user_profile2, container, false);
+    protected int getLayoutId() {
+        return R.layout.user_profile2;
     }
 
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvData = view.findViewById(R.id.tv_getData);
+        tvData = findViewById(R.id.tv_getData);
 
         mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
 
 
         mCommunicateViewModel.getName().observe(this, name ->
-                Log.d(TAG, "来自A的问候"+name));
-
+                Log.d(TAG, "来自A的问候" + name));
 
 
         Log.d(TAG, "onViewCreated: " + viewModel.toString());
         tvData.setOnClickListener(v -> {
-
-            //        一旦用户数据更新，onChanged回调将被调用然后UI会被刷新。
-//            viewModel.getRepoList().observe(this,repoList->{
-//                Log.d(TAG,new Gson().toJson(repoList));
-//            });
             viewModel.getRepoList(userId).observe2(this, repoList -> {
                 Log.d(TAG, new Gson().toJson(repoList));
             }, ((msg, code) -> {
