@@ -11,20 +11,25 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.yuntian.androidnewarchitecture.R;
-import com.yuntian.androidnewarchitecture.base.IView;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
+import com.yuntian.androidnewarchitecture.di.module.ApiServiceModule;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
+import com.yuntian.baselibs.base.BaseFragment;
+import com.yuntian.baselibs.base.IView;
+import com.yuntian.baselibs.di.component.AppComponent;
 
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-public class UserProfileFragmentA extends LifecycleFragment implements IView {
+public class UserProfileFragmentA extends BaseFragment implements IView {
+
 
     private static final String UID_KEY = "uid";
 
     private String userId = "";
+
 
     @Inject
     UserViewModel viewModel;
@@ -48,6 +53,15 @@ public class UserProfileFragmentA extends LifecycleFragment implements IView {
         Log.d(TAG, "onAttach: " + context);
     }
 
+    @Override
+    public void inject(AppComponent appComponent) {
+        DaggerUserComponent.builder()
+                .userModule(new UserModule(this))
+                .appComponent(appComponent)
+                .build()
+                .inject(this);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -57,11 +71,9 @@ public class UserProfileFragmentA extends LifecycleFragment implements IView {
         return inflater.inflate(R.layout.user_profile, container, false);
     }
 
+
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        DaggerUserComponent.builder().userModule(new UserModule(this)).
-                build().inject(this);
 
         tvData = view.findViewById(R.id.tv_getData);
 

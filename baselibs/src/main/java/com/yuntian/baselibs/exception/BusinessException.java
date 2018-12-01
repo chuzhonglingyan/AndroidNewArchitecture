@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.base.exception;
+package com.yuntian.baselibs.exception;
 
 public class BusinessException extends Exception {
 

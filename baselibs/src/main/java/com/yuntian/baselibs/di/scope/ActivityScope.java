@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.di.scope;
+package com.yuntian.baselibs.di.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

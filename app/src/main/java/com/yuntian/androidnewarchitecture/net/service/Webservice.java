@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.net;
+package com.yuntian.androidnewarchitecture.net.service;
 
 import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.bean.User;

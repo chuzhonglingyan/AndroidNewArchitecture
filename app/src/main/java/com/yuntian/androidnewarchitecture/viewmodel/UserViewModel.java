@@ -3,14 +3,16 @@ package com.yuntian.androidnewarchitecture.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.yuntian.androidnewarchitecture.base.data.BaseResultLiveData;
+import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.androidnewarchitecture.repository.IUserData;
 import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.bean.User;
 import com.yuntian.androidnewarchitecture.repository.UserRepository;
+import com.yuntian.baselibs.lifecycle.BaseViewModle;
+
 import java.util.List;
 
-public class UserViewModel extends ViewModel implements IUserData{
+public class UserViewModel extends BaseViewModle implements IUserData{
 
     private LiveData<User> user;
 

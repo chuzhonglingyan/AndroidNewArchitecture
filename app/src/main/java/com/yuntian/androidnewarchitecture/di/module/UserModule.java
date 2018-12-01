@@ -1,7 +1,7 @@
 package com.yuntian.androidnewarchitecture.di.module;
 
-import com.yuntian.androidnewarchitecture.base.IView;
-import com.yuntian.androidnewarchitecture.net.Webservice;
+import com.yuntian.baselibs.base.IView;
+import com.yuntian.androidnewarchitecture.net.service.Webservice;
 import com.yuntian.androidnewarchitecture.repository.UserRepository;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
 
@@ -20,6 +20,7 @@ public class UserModule {
     public UserModule(IView iView) {
         this.iView = iView;
     }
+
 
     @Provides
     public UserRepository provideUserRepository(Webservice webservice) {

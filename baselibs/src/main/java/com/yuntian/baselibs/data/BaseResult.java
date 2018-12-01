@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.base.data;
+package com.yuntian.baselibs.data;
 
 public class BaseResult<T> {
 

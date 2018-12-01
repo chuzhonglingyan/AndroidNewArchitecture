@@ -1,6 +1,6 @@
 package com.yuntian.androidnewarchitecture.repository;
 
-import com.yuntian.androidnewarchitecture.base.data.BaseResultLiveData;
+import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.androidnewarchitecture.bean.Repo;
 
 import java.util.List;

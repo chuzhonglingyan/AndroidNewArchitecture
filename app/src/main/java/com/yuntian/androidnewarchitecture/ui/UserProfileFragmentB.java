@@ -11,16 +11,20 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.yuntian.androidnewarchitecture.R;
-import com.yuntian.androidnewarchitecture.base.IView;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
+import com.yuntian.androidnewarchitecture.di.module.ApiServiceModule;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
+import com.yuntian.baselibs.base.BaseApp;
+import com.yuntian.baselibs.base.BaseFragment;
+import com.yuntian.baselibs.base.IView;
+import com.yuntian.baselibs.di.component.AppComponent;
 
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-public class UserProfileFragmentB extends LifecycleFragment implements IView {
+public class UserProfileFragmentB extends BaseFragment implements IView {
 
     private static final String UID_KEY = "uid";
 
@@ -42,11 +46,28 @@ public class UserProfileFragmentB extends LifecycleFragment implements IView {
         return fragment;
     }
 
+    protected AppComponent getApplicationComponent() {
+        if (getActivity()==null){
+            return null;
+        }
+        return ((BaseApp) getActivity().getApplication()).component();
+    }
+
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.d(TAG, "onAttach: " + context);
+    }
+
+    @Override
+    public void inject(AppComponent appComponent) {
+        DaggerUserComponent.builder()
+                .userModule(new UserModule(this))
+                .appComponent(appComponent)
+                .build()
+                .inject(this);
     }
 
 
@@ -61,7 +82,11 @@ public class UserProfileFragmentB extends LifecycleFragment implements IView {
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DaggerUserComponent.builder().userModule(new UserModule(this)).build().inject(this);
+        DaggerUserComponent.builder()
+                .userModule(new UserModule(this))
+                .appComponent(getApplicationComponent())
+                .build()
+                .inject(this);
 
         tvData = view.findViewById(R.id.tv_getData);
 

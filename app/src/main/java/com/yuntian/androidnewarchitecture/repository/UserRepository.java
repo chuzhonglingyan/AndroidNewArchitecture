@@ -5,28 +5,25 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.yuntian.androidnewarchitecture.base.data.BaseResult;
-import com.yuntian.androidnewarchitecture.base.data.BaseResultLiveData;
+import com.yuntian.baselibs.data.BaseResult;
+import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.bean.User;
-import com.yuntian.androidnewarchitecture.net.NetCallback;
-import com.yuntian.androidnewarchitecture.net.Webservice;
+import com.yuntian.baselibs.net.NetCallback;
+import com.yuntian.androidnewarchitecture.net.service.Webservice;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserRepository implements IUserData {
 
     private static final String TAG = "UserRepository";
 
     private Webservice webservice;
+
 
     public UserRepository(Webservice webservice) {
         this.webservice = webservice;

@@ -1,9 +1,9 @@
-package com.yuntian.androidnewarchitecture.net;
+package com.yuntian.baselibs.net;
 
 import android.support.annotation.NonNull;
 
-import com.yuntian.androidnewarchitecture.base.data.BaseResult;
-import com.yuntian.androidnewarchitecture.base.exception.BusinessException;
+import com.yuntian.baselibs.data.BaseResult;
+import com.yuntian.baselibs.exception.BusinessException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
