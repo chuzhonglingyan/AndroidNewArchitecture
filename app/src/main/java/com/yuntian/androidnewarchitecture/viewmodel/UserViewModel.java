@@ -1,16 +1,16 @@
 package com.yuntian.androidnewarchitecture.viewmodel;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
 
-import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
-import com.yuntian.androidnewarchitecture.repository.IUserData;
 import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.bean.User;
+import com.yuntian.androidnewarchitecture.repository.IUserData;
 import com.yuntian.androidnewarchitecture.repository.UserRepository;
+import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.baselibs.lifecycle.BaseViewModle;
 
 import java.util.List;
+
 
 public class UserViewModel extends BaseViewModle implements IUserData{
 
@@ -18,7 +18,8 @@ public class UserViewModel extends BaseViewModle implements IUserData{
 
     private UserRepository userRepo;
 
-    public UserViewModel(UserRepository userRepo) {
+
+    public void setUserRepo(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 
@@ -37,8 +38,16 @@ public class UserViewModel extends BaseViewModle implements IUserData{
 
     @Override
     public BaseResultLiveData<List<Repo>> getRepoList(String userId) {
-        return userRepo.getRepoList(userId);
+        baseResultLiveData=  userRepo.getRepoList(userId);
+        return baseResultLiveData;
     }
 
 
+    private BaseResultLiveData<List<Repo>> baseResultLiveData;
+
+    @Override
+    public void onCleared() {
+        super.onCleared();
+        baseResultLiveData=null;
+    }
 }

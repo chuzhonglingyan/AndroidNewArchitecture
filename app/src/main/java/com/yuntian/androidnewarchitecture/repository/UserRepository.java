@@ -14,6 +14,8 @@ import com.yuntian.androidnewarchitecture.net.service.Webservice;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +27,7 @@ public class UserRepository implements IUserData {
     private Webservice webservice;
 
 
+    @Inject
     public UserRepository(Webservice webservice) {
         this.webservice = webservice;
     }
@@ -52,7 +55,8 @@ public class UserRepository implements IUserData {
     public BaseResultLiveData<List<Repo>> getRepoList(String userId) {
         // This is not an optimal implementation, we'll fix it below
         final BaseResultLiveData<List<Repo>> data = BaseResultLiveData.newIntance();
-        webservice.listRepos(userId).enqueue(new NetCallback<List<Repo>>() {
+        Call<List<Repo>> call = webservice.listRepos(userId);
+        call.enqueue(new NetCallback<List<Repo>>() {
             @Override
             public void onResponse(BaseResult<List<Repo>> baseResult) {
                 Log.d(TAG, "回调一次" + Thread.currentThread().getName());

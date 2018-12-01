@@ -38,6 +38,8 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0' //okhttp3的log日志
 
+    api "android.arch.lifecycle:extensions:1.1.1"
+    
     implementation 'com.google.dagger:dagger:2.14.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
 }

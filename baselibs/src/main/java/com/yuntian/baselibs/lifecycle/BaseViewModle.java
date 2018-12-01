@@ -2,13 +2,15 @@ package com.yuntian.baselibs.lifecycle;
 
 import android.arch.lifecycle.ViewModel;
 
-public class BaseViewModle extends ViewModel {
+import com.blankj.utilcode.util.LogUtils;
+
+public abstract class BaseViewModle extends ViewModel {
+
 
 
     @Override
-    protected void onCleared() {
+    public void onCleared() {
         super.onCleared();
+        LogUtils.d("onCleared");
     }
-
-
 }

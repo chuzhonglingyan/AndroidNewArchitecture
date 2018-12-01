@@ -1,8 +1,10 @@
 package com.yuntian.androidnewarchitecture.ui;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.yuntian.androidnewarchitecture.R;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
-import com.yuntian.androidnewarchitecture.di.module.ApiServiceModule;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
+import com.yuntian.androidnewarchitecture.viewmodel.CommunicateViewModel;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
 import com.yuntian.baselibs.base.BaseApp;
 import com.yuntian.baselibs.base.BaseFragment;
@@ -25,6 +27,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 public class UserProfileFragmentB extends BaseFragment implements IView {
+
+    private CommunicateViewModel mCommunicateViewModel;
 
     private static final String UID_KEY = "uid";
 
@@ -44,13 +48,6 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
         bundle.putString(UID_KEY, userId);
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    protected AppComponent getApplicationComponent() {
-        if (getActivity()==null){
-            return null;
-        }
-        return ((BaseApp) getActivity().getApplication()).component();
     }
 
 
@@ -82,17 +79,19 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DaggerUserComponent.builder()
-                .userModule(new UserModule(this))
-                .appComponent(getApplicationComponent())
-                .build()
-                .inject(this);
-
         tvData = view.findViewById(R.id.tv_getData);
+
+        mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
+
+
+        mCommunicateViewModel.getName().observe(this, name ->
+                Log.d(TAG, "来自A的问候"+name));
+
 
 
         Log.d(TAG, "onViewCreated: " + viewModel.toString());
         tvData.setOnClickListener(v -> {
+
             //        一旦用户数据更新，onChanged回调将被调用然后UI会被刷新。
 //            viewModel.getRepoList().observe(this,repoList->{
 //                Log.d(TAG,new Gson().toJson(repoList));
@@ -115,6 +114,12 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
             userId = getArguments().getString(UID_KEY);
             viewModel.init(userId);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: " + viewModel.toString());
     }
 
 }
