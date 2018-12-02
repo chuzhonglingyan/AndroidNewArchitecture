@@ -1,22 +1,17 @@
 package com.yuntian.androidnewarchitecture.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.yuntian.androidnewarchitecture.R;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.CommunicateViewModel;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
 import com.yuntian.baselibs.base.BaseFragment;
-import com.yuntian.baselibs.base.IView;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.util.GsonUtil;
 
@@ -71,6 +66,14 @@ public class UserProfileFragmentA extends BaseFragment {
 
                 Log.d(TAG, "code:" + code + ",msg:" + msg);
             }));
+
+            viewModel.getUserList().observe2(this, userList -> {
+                Log.d(TAG, GsonUtil.toJson(userList));
+            }, ((msg, code) -> {
+
+                Log.d(TAG, "code:" + code + ",msg:" + msg);
+            }));
+
         });
         mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
 

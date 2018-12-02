@@ -1,7 +1,7 @@
 package com.yuntian.androidnewarchitecture.net.service;
 
+import com.yuntian.androidnewarchitecture.bean.GitHubUser;
 import com.yuntian.androidnewarchitecture.bean.Repo;
-import com.yuntian.androidnewarchitecture.bean.User;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface Webservice {
      * replacement for the {user} placeholder in the @GET path
      */
     @GET("/users/{user}")
-    Call<User> getUser(@Path("user") String userId);
+    Call<GitHubUser> getUser(@Path("user") String userId);
 
 
 

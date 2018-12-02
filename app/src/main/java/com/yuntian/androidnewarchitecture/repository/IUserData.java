@@ -1,5 +1,6 @@
 package com.yuntian.androidnewarchitecture.repository;
 
+import com.yuntian.androidnewarchitecture.db.entity.User;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.androidnewarchitecture.bean.Repo;
 
@@ -10,5 +11,6 @@ public interface IUserData {
 
     BaseResultLiveData<List<Repo>> getRepoList(String userId);
 
+    BaseResultLiveData<List<User>> getUserList();
 
 }

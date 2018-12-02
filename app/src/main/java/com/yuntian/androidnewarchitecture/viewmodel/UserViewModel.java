@@ -3,7 +3,8 @@ package com.yuntian.androidnewarchitecture.viewmodel;
 import android.arch.lifecycle.LiveData;
 
 import com.yuntian.androidnewarchitecture.bean.Repo;
-import com.yuntian.androidnewarchitecture.bean.User;
+import com.yuntian.androidnewarchitecture.bean.GitHubUser;
+import com.yuntian.androidnewarchitecture.db.entity.User;
 import com.yuntian.androidnewarchitecture.repository.IUserData;
 import com.yuntian.androidnewarchitecture.repository.UserRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class UserViewModel extends BaseViewModle implements IUserData{
 
-    private LiveData<User> user;
+    private LiveData<GitHubUser> user;
 
     private UserRepository userRepo;
 
@@ -32,13 +33,18 @@ public class UserViewModel extends BaseViewModle implements IUserData{
         user = userRepo.getUser(userId);
     }
 
-    public LiveData<User> getUser() {
+    public LiveData<GitHubUser> getUser() {
         return this.user;
     }
 
     @Override
     public BaseResultLiveData<List<Repo>> getRepoList(String userId) {
         return userRepo.getRepoList(userId);
+    }
+
+    @Override
+    public BaseResultLiveData<List<User>> getUserList() {
+        return userRepo.getUserList();
     }
 
 

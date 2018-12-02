@@ -1,6 +1,6 @@
 package com.yuntian.androidnewarchitecture.bean;
 
-public class User {
+public class GitHubUser {
 
     private String userId;
     private String name;

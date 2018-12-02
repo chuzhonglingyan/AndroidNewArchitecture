@@ -37,7 +37,6 @@ public  class BaseResultLiveData<T> extends MutableLiveData<BaseResult<T>> {
     }
 
 
-
     @Override
     public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<BaseResult<T>> observer) {
         super.observe(owner, observer);
