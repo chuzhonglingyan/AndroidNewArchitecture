@@ -1,9 +1,5 @@
 package com.yuntian.androidnewarchitecture.di.module;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-
 import com.yuntian.androidnewarchitecture.net.service.Webservice;
 import com.yuntian.androidnewarchitecture.repository.UserRepository;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
