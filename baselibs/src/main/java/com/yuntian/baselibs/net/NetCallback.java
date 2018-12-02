@@ -13,6 +13,7 @@ import retrofit2.Response;
 public abstract class NetCallback<T> implements Callback<T> {
 
 
+
     @Override
     public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         if (call.isCanceled()) {

@@ -25,9 +25,6 @@ public class CacheControlInterceptor implements Interceptor {
         Request request = chain.request();
         String cacheControl = request.cacheControl().toString();
         if (NetworkUtils.isConnected()) {
-            request = request.newBuilder()
-                    .cacheControl(request.cacheControl())
-                    .build();
             LogUtils.d("has netWork");
         } else {
             request = request.newBuilder()

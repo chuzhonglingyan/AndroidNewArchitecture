@@ -38,16 +38,13 @@ public class UserViewModel extends BaseViewModle implements IUserData{
 
     @Override
     public BaseResultLiveData<List<Repo>> getRepoList(String userId) {
-        baseResultLiveData=  userRepo.getRepoList(userId);
-        return baseResultLiveData;
+        return userRepo.getRepoList(userId);
     }
 
-
-    private BaseResultLiveData<List<Repo>> baseResultLiveData;
 
     @Override
     public void onCleared() {
         super.onCleared();
-        baseResultLiveData=null;
+        userRepo.getRequestManager().cancelCalls();
     }
 }

@@ -1,5 +1,7 @@
 package com.yuntian.baselibs.net.cache;
 
+import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.Utils;
 
 import java.io.File;
@@ -44,12 +46,11 @@ public class CacheStrategy {
     public static final String CACHE_CONTROL_NETWORK = "Cache-Control: public, max-age=3600";
 
 
+    public static final int CACHE_SIZE = 1024 * 1024 * 100;  //100Mb
 
-    public static  final  int CACHE_SIZE=1024 * 1024 * 100;  //100Mb
-
-    public static  Cache getCache(){
+    public static Cache getCache() {
         //缓存
-        File cacheFile = new File(Utils.getApp().getCacheDir(), Utils.getApp().getPackageName() + "-cache");
+        File cacheFile = new File(PathUtils.getInternalAppCachePath(), "netcache");
         return new Cache(cacheFile, CACHE_SIZE);
     }
 

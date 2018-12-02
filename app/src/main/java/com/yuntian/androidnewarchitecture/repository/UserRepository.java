@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.yuntian.baselibs.data.BaseResult;
+import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.bean.User;
@@ -20,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserRepository implements IUserData {
+public class UserRepository extends BaseRepository implements IUserData {
 
     private static final String TAG = "UserRepository";
 
@@ -51,18 +52,22 @@ public class UserRepository implements IUserData {
         return data;
     }
 
+    private BaseResultLiveData<List<Repo>> baseResultLiveData;
+
     @Override
     public BaseResultLiveData<List<Repo>> getRepoList(String userId) {
-        // This is not an optimal implementation, we'll fix it below
-        final BaseResultLiveData<List<Repo>> data = BaseResultLiveData.newIntance();
+        if (baseResultLiveData == null) {
+            baseResultLiveData = BaseResultLiveData.newIntance();
+        }
         Call<List<Repo>> call = webservice.listRepos(userId);
         call.enqueue(new NetCallback<List<Repo>>() {
             @Override
             public void onResponse(BaseResult<List<Repo>> baseResult) {
                 Log.d(TAG, "回调一次" + Thread.currentThread().getName());
-                data.setValue(baseResult);
+                baseResultLiveData.setValue(baseResult);
             }
         });
-        return data;
+        getRequestManager().add(call);
+        return baseResultLiveData;
     }
 }

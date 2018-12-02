@@ -18,6 +18,7 @@ import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
 import com.yuntian.baselibs.base.BaseFragment;
 import com.yuntian.baselibs.base.IView;
 import com.yuntian.baselibs.di.component.AppComponent;
+import com.yuntian.baselibs.util.GsonUtil;
 
 import javax.inject.Inject;
 
@@ -82,7 +83,7 @@ public class UserProfileFragmentA extends BaseFragment implements IView {
             mCommunicateViewModel.setName("Jane");
             //        一旦用户数据更新，onChanged回调将被调用然后UI会被刷新。
             viewModel.getRepoList(userId).observe2(this, repoList -> {
-                Log.d(TAG, new Gson().toJson(repoList));
+                Log.d(TAG, GsonUtil.toJson(repoList));
             }, ((msg, code) -> {
 
                 Log.d(TAG, "code:" + code + ",msg:" + msg);
