@@ -28,7 +28,7 @@ import javax.inject.Inject;
 
 public class UserProfileFragmentB extends BaseFragment implements IView {
 
-    private CommunicateViewModel mCommunicateViewModel;
+    public static final String TAG = "UserProfileFragmentB";
 
     private static final String UID_KEY = "uid";
 
@@ -36,8 +36,8 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
 
     @Inject
     UserViewModel viewModel;
+    private CommunicateViewModel mCommunicateViewModel;
 
-    public static final String TAG = "UserProfileFragmentB";
 
 
     private TextView tvData;
@@ -61,23 +61,22 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.user_profile2;
+    protected void initView() {
+        tvData = findViewById(R.id.tv_getData);
     }
 
-    public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tvData = findViewById(R.id.tv_getData);
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+        if (getArguments() != null) {
+            userId = getArguments().getString(UID_KEY);
+            viewModel.init(userId);
+        }
 
         mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
-
 
         mCommunicateViewModel.getName().observe(this, name ->
                 Log.d(TAG, "来自A的问候" + name));
 
-
-        Log.d(TAG, "onViewCreated: " + viewModel.toString());
         tvData.setOnClickListener(v -> {
             viewModel.getRepoList(userId).observe2(this, repoList -> {
                 Log.d(TAG, new Gson().toJson(repoList));
@@ -87,17 +86,13 @@ public class UserProfileFragmentB extends BaseFragment implements IView {
             }));
 
         });
-
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (getArguments() != null) {
-            userId = getArguments().getString(UID_KEY);
-            viewModel.init(userId);
-        }
+    protected int getLayoutId() {
+        return R.layout.user_profile2;
     }
+
 
     @Override
     public void onDestroy() {

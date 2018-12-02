@@ -24,21 +24,18 @@ import javax.inject.Inject;
 
 public class UserProfileFragmentA extends BaseFragment implements IView {
 
-    private CommunicateViewModel mCommunicateViewModel;
+    public static final String TAG = "UserProfileFragmentA";
 
     private static final String UID_KEY = "uid";
-
     private String userId = "";
 
+    private TextView tvData;
 
+    private CommunicateViewModel mCommunicateViewModel;
     @Inject
     UserViewModel viewModel;
 
 
-    public static final String TAG = "UserProfileFragmentA";
-
-
-    private TextView tvData;
 
     public static UserProfileFragmentA newIntance(String userId) {
         UserProfileFragmentA fragment = new UserProfileFragmentA();
@@ -49,12 +46,6 @@ public class UserProfileFragmentA extends BaseFragment implements IView {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: " + context);
-    }
-
-    @Override
     public void inject(AppComponent appComponent) {
         DaggerUserComponent.builder()
                 .userModule(new UserModule(this))
@@ -62,23 +53,15 @@ public class UserProfileFragmentA extends BaseFragment implements IView {
                 .build()
                 .inject(this);
 
-        mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
     }
-
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.user_profile;
+    protected void initView() {
+        tvData = findViewById(R.id.tv_getData);
     }
 
-
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tvData = view.findViewById(R.id.tv_getData);
-
-        Log.d(TAG, "onViewCreated: " + viewModel.toString());
-
+    @Override
+    protected void initData(Bundle savedInstanceState) {
         tvData.setOnClickListener(v -> {
             mCommunicateViewModel.setName("Jane");
             //        一旦用户数据更新，onChanged回调将被调用然后UI会被刷新。
@@ -89,17 +72,20 @@ public class UserProfileFragmentA extends BaseFragment implements IView {
                 Log.d(TAG, "code:" + code + ",msg:" + msg);
             }));
         });
+        mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         if (getArguments() != null) {
             userId = getArguments().getString(UID_KEY);
-            viewModel.init("octocat");
+            viewModel.init(userId);
         }
     }
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.user_profile;
+    }
+
 
     @Override
     public void onDestroy() {

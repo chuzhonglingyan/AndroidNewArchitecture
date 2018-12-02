@@ -7,18 +7,26 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.R;
+import com.yuntian.baselibs.base.BaseActivity;
+import com.yuntian.baselibs.di.component.AppComponent;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private UserProfileFragmentA userProfileFragmentA;
     private UserProfileFragmentB userProfileFragmentB;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initFrament();
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    public void inject(AppComponent appComponent) {
+
+    }
+
+    @Override
+    protected void initView() {
         findViewById(R.id.tv_delete).setOnClickListener(v->{
 
             LogUtils.d("替换userProfileFragmentB");
@@ -26,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.fl_b,UserProfileFragmentA.newIntance("octocat"));
             fragmentTransaction.commit();
         });
+    }
+
+    @Override
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        initFrament();
     }
 
 
