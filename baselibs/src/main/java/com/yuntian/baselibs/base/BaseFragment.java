@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.yuntian.baselibs.di.component.AppComponent;
 
-public abstract class BaseFragment extends Fragment implements LifecycleOwner {
+public abstract class BaseFragment extends Fragment implements LifecycleOwner,IView {
 
     protected Activity activity;
     protected Context context;

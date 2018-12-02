@@ -8,6 +8,7 @@ import com.yuntian.androidnewarchitecture.net.service.Webservice;
 import com.yuntian.androidnewarchitecture.repository.UserRepository;
 import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
 import com.yuntian.baselibs.base.IView;
+import com.yuntian.baselibs.base.IViewUtil;
 
 import dagger.Module;
 import dagger.Provides;
@@ -34,14 +35,7 @@ public class UserModule {
 
     @Provides
     public UserViewModel provideUserViewModel(UserRepository userRepository) {
-        UserViewModel userViewModel;
-        if (iView instanceof  Fragment){
-            userViewModel=  ViewModelProviders.of((Fragment) iView).get(UserViewModel.class);
-        }else if (iView instanceof FragmentActivity){
-            userViewModel=  ViewModelProviders.of((FragmentActivity) iView).get(UserViewModel.class);
-        }else {
-            userViewModel=  new UserViewModel();
-        }
+        UserViewModel userViewModel=IViewUtil.getViewModule(iView,UserViewModel.class);
         userViewModel.setUserRepo(userRepository);
         return userViewModel;
     }

@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.yuntian.baselibs.di.component.AppComponent;
 
-public abstract class BaseActivity extends AppCompatActivity implements LifecycleOwner {
+public abstract class BaseActivity extends AppCompatActivity implements LifecycleOwner, IView {
 
     protected Context context;
 
@@ -35,9 +35,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     public abstract void inject(AppComponent appComponent);
 
 
-    protected abstract void  initView();
+    protected abstract void initView();
 
-    protected abstract void  initData(@Nullable Bundle savedInstanceState);
+    protected abstract void initData(@Nullable Bundle savedInstanceState);
 
 
 }

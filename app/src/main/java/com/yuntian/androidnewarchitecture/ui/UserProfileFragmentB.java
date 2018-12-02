@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-public class UserProfileFragmentB extends BaseFragment implements IView {
+public class UserProfileFragmentB extends BaseFragment {
 
     public static final String TAG = "UserProfileFragmentB";
 

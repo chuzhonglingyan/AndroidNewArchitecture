@@ -22,7 +22,7 @@ import com.yuntian.baselibs.util.GsonUtil;
 
 import javax.inject.Inject;
 
-public class UserProfileFragmentA extends BaseFragment implements IView {
+public class UserProfileFragmentA extends BaseFragment {
 
     public static final String TAG = "UserProfileFragmentA";
 
