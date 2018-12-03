@@ -37,5 +37,5 @@ task clean(type: Delete) {
 }
 
 //lint耗时不少
-gradle.startParameter.excludedTaskNames.add('lint')
-gradle.startParameter.excludedTaskNames.add('lintVitalRelease')
+//gradle.startParameter.excludedTaskNames.add('lint')
+//gradle.startParameter.excludedTaskNames.add('lintVitalRelease')

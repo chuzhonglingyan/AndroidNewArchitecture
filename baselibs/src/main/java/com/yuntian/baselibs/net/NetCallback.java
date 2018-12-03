@@ -3,7 +3,7 @@ package com.yuntian.baselibs.net;
 import android.support.annotation.NonNull;
 
 import com.yuntian.baselibs.data.BaseResult;
-import com.yuntian.baselibs.exception.BusinessException;
+import com.yuntian.baselibs.exception.ServerException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,7 +17,7 @@ public abstract class NetCallback<T> implements Callback<T> {
     @Override
     public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         if (call.isCanceled()) {
-            onFailure(call, new BusinessException(0, "请求被取消了"));
+            onFailure(call, new ServerException(0, "请求被取消了"));
             return;
         }
         BaseResult<T> baseResult = new BaseResult<>();

@@ -1,65 +1,29 @@
 package com.yuntian.androidnewarchitecture.repository;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.yuntian.androidnewarchitecture.base.App;
-import com.yuntian.androidnewarchitecture.bean.GitHubUser;
-import com.yuntian.androidnewarchitecture.db.AppDatabase;
+import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.db.entity.User;
+import com.yuntian.androidnewarchitecture.net.service.GitHubservice;
 import com.yuntian.baselibs.data.BaseResult;
 import com.yuntian.baselibs.data.BaseResultUtil;
 import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
-import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.baselibs.net.NetCallback;
-import com.yuntian.androidnewarchitecture.net.service.Webservice;
-import com.yuntian.baselibs.util.GsonUtil;
 
 import java.util.List;
-
-import javax.inject.Inject;
-
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class UserRepository extends BaseRepository implements IUserData {
+public class GitHubRepository extends BaseRepository<GitHubservice> implements IGitHubData {
 
-    private static final String TAG = "UserRepository";
+    private static final String TAG = "GitHubRepository";
 
-    private Webservice webservice;
-
-
-
-
-    @Inject
-    public UserRepository(Webservice webservice) {
-        this.webservice = webservice;
+    public GitHubRepository(GitHubservice service) {
+        super(service);
     }
 
-    // ...
-    public LiveData<GitHubUser> getUser(String userId) {
-        // This is not an optimal implementation, we'll fix it below
-        final MutableLiveData<GitHubUser> data = new MutableLiveData<>();
-        webservice.getUser(userId).enqueue(new Callback<GitHubUser>() {
-            @Override
-            public void onResponse(@NonNull Call<GitHubUser> call, @NonNull Response<GitHubUser> response) {
-                // error case is left out for brevity
-                data.setValue(response.body());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<GitHubUser> call, @NonNull Throwable t) {
-
-            }
-        });
-        return data;
-    }
 
     private BaseResultLiveData<List<Repo>> baseResultLiveData;
 
@@ -70,7 +34,7 @@ public class UserRepository extends BaseRepository implements IUserData {
         if (baseResultLiveData == null) {
             baseResultLiveData = BaseResultLiveData.newIntance();
         }
-        Call<List<Repo>> call = webservice.listRepos(userId);
+        Call<List<Repo>> call = service.listRepos(userId);
         call.enqueue(new NetCallback<List<Repo>>() {
             @Override
             public void onResponse(BaseResult<List<Repo>> baseResult) {

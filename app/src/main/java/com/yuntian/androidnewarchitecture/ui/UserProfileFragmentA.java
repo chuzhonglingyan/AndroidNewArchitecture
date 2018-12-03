@@ -10,7 +10,8 @@ import com.yuntian.androidnewarchitecture.R;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.CommunicateViewModel;
-import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
+import com.yuntian.androidnewarchitecture.viewmodel.GankViewModel;
+import com.yuntian.androidnewarchitecture.viewmodel.GitHubViewModel;
 import com.yuntian.baselibs.base.BaseFragment;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.util.GsonUtil;
@@ -28,8 +29,11 @@ public class UserProfileFragmentA extends BaseFragment {
 
     private CommunicateViewModel mCommunicateViewModel;
     @Inject
-    UserViewModel viewModel;
+    GankViewModel gankViewModel;
 
+
+    @Inject
+    GitHubViewModel gitHubViewModel;
 
 
     public static UserProfileFragmentA newIntance(String userId) {
@@ -60,26 +64,33 @@ public class UserProfileFragmentA extends BaseFragment {
         tvData.setOnClickListener(v -> {
             mCommunicateViewModel.setName("Jane");
             //        一旦用户数据更新，onChanged回调将被调用然后UI会被刷新。
-            viewModel.getRepoList(userId).observe2(this, repoList -> {
+            gitHubViewModel.getRepoList(userId).observe2(this, repoList -> {
                 Log.d(TAG, GsonUtil.toJson(repoList));
             }, ((msg, code) -> {
-
                 Log.d(TAG, "code:" + code + ",msg:" + msg);
             }));
 
-            viewModel.getUserList().observe2(this, userList -> {
+            gitHubViewModel.getUserList().observe2(this, userList -> {
                 Log.d(TAG, GsonUtil.toJson(userList));
             }, ((msg, code) -> {
 
                 Log.d(TAG, "code:" + code + ",msg:" + msg);
             }));
 
+            gankViewModel.getGankInfoList("福利",1).observe2(this, result -> {
+                Log.d(TAG, GsonUtil.toJson(result));
+            }, ((msg, code) -> {
+
+                Log.d(TAG, "code:" + code + ",msg:" + msg);
+            }));
+
+
         });
         mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
 
         if (getArguments() != null) {
             userId = getArguments().getString(UID_KEY);
-            viewModel.init(userId);
+            gitHubViewModel.init(userId);
         }
     }
 
@@ -93,6 +104,6 @@ public class UserProfileFragmentA extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy: " + viewModel.toString());
+        Log.d(TAG, "onDestroy: " + gitHubViewModel.toString());
     }
 }

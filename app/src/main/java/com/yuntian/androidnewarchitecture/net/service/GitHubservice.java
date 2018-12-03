@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface Webservice {
+public interface GitHubservice {
 
     /**
      * @GET declares an HTTP GET request

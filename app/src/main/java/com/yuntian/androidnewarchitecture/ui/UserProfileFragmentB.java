@@ -1,14 +1,9 @@
 package com.yuntian.androidnewarchitecture.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -16,13 +11,10 @@ import com.yuntian.androidnewarchitecture.R;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.CommunicateViewModel;
-import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
-import com.yuntian.baselibs.base.BaseApp;
+import com.yuntian.androidnewarchitecture.viewmodel.GankViewModel;
+import com.yuntian.androidnewarchitecture.viewmodel.GitHubViewModel;
 import com.yuntian.baselibs.base.BaseFragment;
-import com.yuntian.baselibs.base.IView;
 import com.yuntian.baselibs.di.component.AppComponent;
-
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
@@ -35,7 +27,10 @@ public class UserProfileFragmentB extends BaseFragment {
     private String userId = "";
 
     @Inject
-    UserViewModel viewModel;
+    GitHubViewModel gitHubViewModel;
+
+
+
     private CommunicateViewModel mCommunicateViewModel;
 
 
@@ -69,7 +64,7 @@ public class UserProfileFragmentB extends BaseFragment {
     protected void initData(Bundle savedInstanceState) {
         if (getArguments() != null) {
             userId = getArguments().getString(UID_KEY);
-            viewModel.init(userId);
+            gitHubViewModel.init(userId);
         }
 
         mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
@@ -78,7 +73,7 @@ public class UserProfileFragmentB extends BaseFragment {
                 Log.d(TAG, "来自A的问候" + name));
 
         tvData.setOnClickListener(v -> {
-            viewModel.getRepoList(userId).observe2(this, repoList -> {
+            gitHubViewModel.getRepoList(userId).observe2(this, repoList -> {
                 Log.d(TAG, new Gson().toJson(repoList));
             }, ((msg, code) -> {
 
@@ -97,7 +92,7 @@ public class UserProfileFragmentB extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy: " + viewModel.toString());
+        Log.d(TAG, "onDestroy: " + gitHubViewModel.toString());
     }
 
 }

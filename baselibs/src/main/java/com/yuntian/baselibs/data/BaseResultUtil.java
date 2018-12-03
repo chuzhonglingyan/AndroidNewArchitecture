@@ -10,6 +10,10 @@ public class BaseResultUtil{
         return  createResult(null,0,msg);
     }
 
+    public  static <T>  BaseResult<T> createFailureResult(int code,String msg){
+        return  createResult(null,code,msg);
+    }
+
     public  static <T>  BaseResult<T> createResult(T data, int code, String msg){
         BaseResult<T> baseResult=new BaseResult<T>();
         baseResult.setCode(code);

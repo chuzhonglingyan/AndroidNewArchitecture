@@ -6,7 +6,7 @@ import com.yuntian.androidnewarchitecture.bean.Repo;
 
 import java.util.List;
 
-public interface IUserData {
+public interface IGitHubData {
 
 
     BaseResultLiveData<List<Repo>> getRepoList(String userId);

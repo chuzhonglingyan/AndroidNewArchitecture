@@ -1,8 +1,11 @@
 package com.yuntian.androidnewarchitecture.di.module;
 
-import com.yuntian.androidnewarchitecture.net.service.Webservice;
-import com.yuntian.androidnewarchitecture.repository.UserRepository;
-import com.yuntian.androidnewarchitecture.viewmodel.UserViewModel;
+import com.yuntian.androidnewarchitecture.net.service.GankService;
+import com.yuntian.androidnewarchitecture.net.service.GitHubservice;
+import com.yuntian.androidnewarchitecture.repository.GankRepository;
+import com.yuntian.androidnewarchitecture.repository.GitHubRepository;
+import com.yuntian.androidnewarchitecture.viewmodel.GankViewModel;
+import com.yuntian.androidnewarchitecture.viewmodel.GitHubViewModel;
 import com.yuntian.baselibs.base.IView;
 import com.yuntian.baselibs.base.IViewUtil;
 
@@ -24,16 +27,30 @@ public class UserModule {
 
 
     @Provides
-    public UserRepository provideUserRepository(Webservice webservice) {
-        return new UserRepository(webservice);
+    public GitHubRepository provideGitUserRepository(GitHubservice service) {
+        return new GitHubRepository(service);
+    }
+
+    @Provides
+    public GankRepository provideGankRepository(GankService service) {
+        return new GankRepository(service);
     }
 
 
     @Provides
-    public UserViewModel provideUserViewModel(UserRepository userRepository) {
-        UserViewModel userViewModel=IViewUtil.getViewModule(iView,UserViewModel.class);
-        userViewModel.setUserRepo(userRepository);
-        return userViewModel;
+    public GitHubViewModel provideGitHubViewModel(GitHubRepository  repository) {
+        GitHubViewModel viewModule=IViewUtil.getViewModule(iView,GitHubViewModel.class);
+        viewModule.setRepo(repository);
+        return viewModule;
+    }
+
+
+
+    @Provides
+    public GankViewModel provideGankViewModel(GankRepository  repository) {
+        GankViewModel viewModule=IViewUtil.getViewModule(iView,GankViewModel.class);
+        viewModule.setRepo(repository);
+        return viewModule;
     }
 
 
