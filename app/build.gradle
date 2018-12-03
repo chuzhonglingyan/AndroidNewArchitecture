@@ -20,6 +20,12 @@ android {
             }
         }
 
+        dexOptions{
+             //是否支持大工程模式
+            jumboMode = true
+            //线程数
+            threadCount = 8
+        }
 
     }
     buildTypes {
