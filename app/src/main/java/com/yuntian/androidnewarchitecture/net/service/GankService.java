@@ -4,6 +4,8 @@ import com.yuntian.androidnewarchitecture.bean.GankInfo;
 import com.yuntian.baselibs.data.BaseResult;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -18,5 +20,5 @@ public interface GankService {
      * @return
      */
     @GET("https://gank.io/api/data/{dataType}/10/{page}")
-    Observable<BaseResult<List<GankInfo>>> getGankInfoList(@Path("dataType") String dataType, @Path("page") int page);
+    Flowable<BaseResult<List<GankInfo>>> getGankInfoList(@Path("dataType") String dataType, @Path("page") int page);
 }

@@ -1,16 +1,16 @@
-package com.yuntian.androidnewarchitecture.repository;
+package com.yuntian.androidnewarchitecture.repository.net;
 
 import com.yuntian.androidnewarchitecture.bean.GankInfo;
 import com.yuntian.androidnewarchitecture.net.service.GankService;
 import com.yuntian.baselibs.data.BaseResult;
 import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
-import com.yuntian.baselibs.rxjava.CustomObserver;
+import com.yuntian.baselibs.rxjava.CustomSubscriber;
 import com.yuntian.baselibs.rxjava.RxHandleResult;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 
 public class GankRepository extends BaseRepository<GankService> implements IGankData {
 
@@ -24,8 +24,8 @@ public class GankRepository extends BaseRepository<GankService> implements IGank
     @Override
     public BaseResultLiveData<List<GankInfo>> getGankInfoList(String dataType, int page) {
         final BaseResultLiveData<List<GankInfo>> data = BaseResultLiveData.newIntance();
-        Observable<List<GankInfo>> gankListObservable = service.getGankInfoList(dataType, page).compose(RxHandleResult.handleResult());
-        gankListObservable.subscribe(new CustomObserver<List<GankInfo>>(getRxManager()) {
+        Flowable<List<GankInfo>> flowable = service.getGankInfoList(dataType, page).compose(RxHandleResult.handleFlowableResult());
+        flowable.subscribe(new CustomSubscriber<List<GankInfo>>() {
             @Override
             public void onResponse(BaseResult<List<GankInfo>> baseResult) {
                 data.setValue(baseResult);

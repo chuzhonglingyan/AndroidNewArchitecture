@@ -6,16 +6,21 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 
+import com.yuntian.androidnewarchitecture.db.entity.EventLog;
 import com.yuntian.androidnewarchitecture.db.entity.User;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 @Dao
 public interface UserDao {
 
 
     @Query("SELECT * FROM user")
-    List<User> getAll();
+    Flowable<List<User>> getAll();
+
+
 
     @Query("SELECT * FROM user WHERE id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
@@ -31,6 +36,10 @@ public interface UserDao {
 
     @Insert
     void insertAll(User... users);
+
+
+    @Insert
+    void insertAll(List<User> userList);
 
     @Delete
     void delete(User user);

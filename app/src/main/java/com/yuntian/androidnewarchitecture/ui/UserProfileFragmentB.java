@@ -11,7 +11,6 @@ import com.yuntian.androidnewarchitecture.R;
 import com.yuntian.androidnewarchitecture.di.component.DaggerUserComponent;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.CommunicateViewModel;
-import com.yuntian.androidnewarchitecture.viewmodel.GankViewModel;
 import com.yuntian.androidnewarchitecture.viewmodel.GitHubViewModel;
 import com.yuntian.baselibs.base.BaseFragment;
 import com.yuntian.baselibs.di.component.AppComponent;
@@ -30,9 +29,7 @@ public class UserProfileFragmentB extends BaseFragment {
     GitHubViewModel gitHubViewModel;
 
 
-
     private CommunicateViewModel mCommunicateViewModel;
-
 
 
     private TextView tvData;

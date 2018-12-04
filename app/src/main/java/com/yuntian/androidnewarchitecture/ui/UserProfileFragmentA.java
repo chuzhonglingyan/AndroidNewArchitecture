@@ -70,12 +70,6 @@ public class UserProfileFragmentA extends BaseFragment {
                 Log.d(TAG, "code:" + code + ",msg:" + msg);
             }));
 
-            gitHubViewModel.getUserList().observe2(this, userList -> {
-                Log.d(TAG, GsonUtil.toJson(userList));
-            }, ((msg, code) -> {
-
-                Log.d(TAG, "code:" + code + ",msg:" + msg);
-            }));
 
             gankViewModel.getGankInfoList("福利",1).observe2(this, result -> {
                 Log.d(TAG, GsonUtil.toJson(result));

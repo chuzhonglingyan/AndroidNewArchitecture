@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.repository;
+package com.yuntian.androidnewarchitecture.repository.net;
 
 import com.yuntian.androidnewarchitecture.bean.GankInfo;
 import com.yuntian.androidnewarchitecture.bean.Repo;

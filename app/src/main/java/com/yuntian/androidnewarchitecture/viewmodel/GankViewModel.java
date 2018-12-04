@@ -1,8 +1,8 @@
 package com.yuntian.androidnewarchitecture.viewmodel;
 
 import com.yuntian.androidnewarchitecture.bean.GankInfo;
-import com.yuntian.androidnewarchitecture.repository.GankRepository;
-import com.yuntian.androidnewarchitecture.repository.IGankData;
+import com.yuntian.androidnewarchitecture.repository.net.GankRepository;
+import com.yuntian.androidnewarchitecture.repository.net.IGankData;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.baselibs.lifecycle.BaseViewModle;
 
@@ -19,9 +19,5 @@ public class GankViewModel extends BaseViewModle<GankRepository> implements IGan
     }
 
 
-    @Override
-    public void onCleared() {
-        super.onCleared();
-        repo.getRxManager().clear();
-    }
+
 }
