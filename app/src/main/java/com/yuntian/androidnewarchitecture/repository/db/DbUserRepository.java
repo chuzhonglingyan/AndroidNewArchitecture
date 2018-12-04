@@ -2,24 +2,17 @@ package com.yuntian.androidnewarchitecture.repository.db;
 
 import android.annotation.SuppressLint;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.db.dao.UserDao;
 import com.yuntian.androidnewarchitecture.db.entity.User;
 import com.yuntian.baselibs.data.BaseResult;
-import com.yuntian.baselibs.data.BaseResultUtil;
 import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.baselibs.rxjava.DbCustomSubscriber;
 import com.yuntian.baselibs.rxjava.RxHandleResult;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.subscribers.DisposableSubscriber;
 
 public class DbUserRepository extends BaseRepository<UserDao> implements IDbUserData {
 
