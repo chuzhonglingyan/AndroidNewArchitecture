@@ -22,6 +22,8 @@ public class DbUserRepository extends BaseRepository<UserDao> implements IDbUser
         super(service);
     }
 
+
+
     @SuppressLint("CheckResult")
     @Override
     public BaseResultLiveData<List<User>> getUserList() {

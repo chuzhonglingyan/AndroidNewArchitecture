@@ -11,6 +11,17 @@ import java.util.List;
 
 public class DbViewModel extends BaseViewModle<DbUserRepository> implements IDbUserData {
 
+    private BaseResultLiveData<List<User>>  showList;
+
+
+    public void  initData(){
+        showList=repo.getUserList();
+    }
+
+    public BaseResultLiveData<List<User>> getShowList() {
+        return showList;
+    }
+
 
     @Override
     public BaseResultLiveData<List<User>> getUserList() {

@@ -25,7 +25,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         this.context = this;
         inject(getApplicationComponent(this));
         initView();
-        initData(savedInstanceState);
+        initListener();
+        initData(savedInstanceState==null,savedInstanceState);
     }
 
 
@@ -37,7 +38,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
 
     protected abstract void initView();
 
-    protected abstract void initData(@Nullable Bundle savedInstanceState);
+    protected abstract void initListener();
+
+    protected abstract void initData(boolean isInit,@Nullable Bundle savedInstanceState);
+
+
 
 
 }

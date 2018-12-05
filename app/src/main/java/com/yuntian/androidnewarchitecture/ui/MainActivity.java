@@ -42,7 +42,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData(@Nullable Bundle savedInstanceState) {
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initData(boolean isInit,@Nullable Bundle savedInstanceState) {
         initFrament();
     }
 
