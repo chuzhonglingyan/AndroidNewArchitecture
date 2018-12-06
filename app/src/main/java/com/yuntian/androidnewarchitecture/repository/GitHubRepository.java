@@ -1,9 +1,10 @@
-package com.yuntian.androidnewarchitecture.repository.net;
+package com.yuntian.androidnewarchitecture.repository;
 
 import android.util.Log;
 
 import com.yuntian.androidnewarchitecture.bean.Repo;
 import com.yuntian.androidnewarchitecture.net.service.GitHubservice;
+import com.yuntian.androidnewarchitecture.contract.GitHubContract;
 import com.yuntian.baselibs.data.BaseResult;
 import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
@@ -13,7 +14,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class GitHubRepository extends BaseRepository<GitHubservice> implements IGitHubData {
+public class GitHubRepository extends BaseRepository<GitHubservice> implements GitHubContract {
 
     private static final String TAG = "GitHubRepository";
 

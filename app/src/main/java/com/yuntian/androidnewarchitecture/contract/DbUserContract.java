@@ -1,11 +1,11 @@
-package com.yuntian.androidnewarchitecture.repository.db;
+package com.yuntian.androidnewarchitecture.contract;
 
 import com.yuntian.androidnewarchitecture.db.entity.User;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 
 import java.util.List;
 
-public interface IDbUserData {
+public interface DbUserContract {
 
     BaseResultLiveData<List<User>> getUserList();
 

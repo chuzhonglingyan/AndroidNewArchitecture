@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
-import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.R;
 import com.yuntian.baselibs.base.BaseActivity;

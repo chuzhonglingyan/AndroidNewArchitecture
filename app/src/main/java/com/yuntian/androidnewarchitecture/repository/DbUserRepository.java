@@ -1,9 +1,10 @@
-package com.yuntian.androidnewarchitecture.repository.db;
+package com.yuntian.androidnewarchitecture.repository;
 
 import android.annotation.SuppressLint;
 
 import com.yuntian.androidnewarchitecture.db.dao.UserDao;
 import com.yuntian.androidnewarchitecture.db.entity.User;
+import com.yuntian.androidnewarchitecture.contract.DbUserContract;
 import com.yuntian.baselibs.data.BaseResult;
 import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-public class DbUserRepository extends BaseRepository<UserDao> implements IDbUserData {
+public class DbUserRepository extends BaseRepository<UserDao> implements DbUserContract {
 
     private static final String TAG = "DbUserRepository";
 

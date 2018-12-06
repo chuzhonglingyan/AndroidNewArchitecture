@@ -76,9 +76,9 @@
 
 
     <EditText
+        android:id="@+id/ed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="没有保存"
         android:textColor="@android:color/black"
         android:textSize="16dp"
         android:gravity="center"

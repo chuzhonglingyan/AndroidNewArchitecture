@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'junit:junit:4.12'
+    implementation 'org.freemarker:freemarker:2.3.23' //代码生成器依赖
+    implementation 'com.google.guava:guava:23.0'
+    implementation 'org.apache.commons:commons-lang3:3.6'
+
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

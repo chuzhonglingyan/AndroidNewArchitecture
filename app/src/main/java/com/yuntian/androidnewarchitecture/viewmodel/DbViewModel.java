@@ -1,15 +1,15 @@
 package com.yuntian.androidnewarchitecture.viewmodel;
 
 import com.yuntian.androidnewarchitecture.db.entity.User;
-import com.yuntian.androidnewarchitecture.repository.db.DbUserRepository;
-import com.yuntian.androidnewarchitecture.repository.db.IDbUserData;
+import com.yuntian.androidnewarchitecture.repository.DbUserRepository;
+import com.yuntian.androidnewarchitecture.contract.DbUserContract;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
 import com.yuntian.baselibs.lifecycle.BaseViewModle;
 
 import java.util.List;
 
 
-public class DbViewModel extends BaseViewModle<DbUserRepository> implements IDbUserData {
+public class DbViewModel extends BaseViewModle<DbUserRepository> implements DbUserContract {
 
     private BaseResultLiveData<List<User>>  showList;
 

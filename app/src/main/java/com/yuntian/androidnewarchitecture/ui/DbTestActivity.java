@@ -1,6 +1,7 @@
 package com.yuntian.androidnewarchitecture.ui;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
@@ -14,11 +15,16 @@ import com.yuntian.androidnewarchitecture.viewmodel.DbViewModel;
 import com.yuntian.baselibs.base.BaseActivity;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.util.GsonUtil;
+import com.yuntian.baselibs.work.CompressWorker;
+import com.yuntian.baselibs.work.WorkManagerUtil;
 
 import java.util.Random;
 import java.util.UUID;
 
 import javax.inject.Inject;
+
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
 
 public class DbTestActivity extends BaseActivity {
 
@@ -48,10 +54,39 @@ public class DbTestActivity extends BaseActivity {
     }
 
 
+    /**
+     * android8.0调用在onStop之后，之前在onStp之前，onPause前后不确定 默认保存有id的焦点视图
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState); //保存少量数据
         LogUtils.d(dbViewModel.toString());//activity恢复重建,但是viewModel仍然保持在内存
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -95,6 +130,21 @@ public class DbTestActivity extends BaseActivity {
             }, ((msg, code) -> {
                 LogUtils.d( "code:" + code + ",msg:" + msg);
             }));
+            testRestore.setTextColor(Color.BLUE);
+            Data myData = new Data.Builder()
+                    .putLong(CompressWorker.KEY_X_ARG, 42)
+                    .putLong(CompressWorker.KEY_Y_ARG, 421)
+                    .putLong(CompressWorker.KEY_Z_ARG, 5666)
+                    .build();
+            OneTimeWorkRequest compressWorkerRequest= WorkManagerUtil.startOneTimeWorkRequest(CompressWorker.class,myData);
+
+            WorkManagerUtil.observe(this,compressWorkerRequest.getId(), workInfo -> {
+                // Do something with the status
+                if (workInfo != null && workInfo.getState().isFinished()) {
+                    // ...
+                    LogUtils.d( "workInfo:" + workInfo.getOutputData().getInt(CompressWorker.KEY_RESULT,0));
+                }
+            });
         });
     }
 
@@ -102,10 +152,9 @@ public class DbTestActivity extends BaseActivity {
     protected void initData(boolean isInit,@Nullable Bundle savedInstanceState) {
 
         if (isInit){
-            testRestore.setText("测试恢复数据");
             dbViewModel.initData();//只要初始化数据的地方
         }
-
+        testRestore.setText("数据");
         dbViewModel.getShowList().observe2(this, result -> {
             tvQueryResult.setText(GsonUtil.toJson(result));
             LogUtils.d(GsonUtil.toJson(result));
@@ -115,8 +164,9 @@ public class DbTestActivity extends BaseActivity {
 
         LogUtils.d(this.toString());
         LogUtils.d(dbViewModel.toString());
-    }
 
+
+    }
 
 
 

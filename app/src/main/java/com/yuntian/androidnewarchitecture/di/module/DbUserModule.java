@@ -1,7 +1,7 @@
 package com.yuntian.androidnewarchitecture.di.module;
 
 import com.yuntian.androidnewarchitecture.base.App;
-import com.yuntian.androidnewarchitecture.repository.db.DbUserRepository;
+import com.yuntian.androidnewarchitecture.repository.DbUserRepository;
 import com.yuntian.androidnewarchitecture.viewmodel.DbViewModel;
 import com.yuntian.baselibs.base.IView;
 import com.yuntian.baselibs.base.IViewUtil;

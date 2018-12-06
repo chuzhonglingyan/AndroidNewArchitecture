@@ -2,8 +2,8 @@ package com.yuntian.androidnewarchitecture.di.module;
 
 import com.yuntian.androidnewarchitecture.net.service.GankService;
 import com.yuntian.androidnewarchitecture.net.service.GitHubservice;
-import com.yuntian.androidnewarchitecture.repository.net.GankRepository;
-import com.yuntian.androidnewarchitecture.repository.net.GitHubRepository;
+import com.yuntian.androidnewarchitecture.repository.GankRepository;
+import com.yuntian.androidnewarchitecture.repository.GitHubRepository;
 import com.yuntian.androidnewarchitecture.viewmodel.GankViewModel;
 import com.yuntian.androidnewarchitecture.viewmodel.GitHubViewModel;
 import com.yuntian.baselibs.base.IView;

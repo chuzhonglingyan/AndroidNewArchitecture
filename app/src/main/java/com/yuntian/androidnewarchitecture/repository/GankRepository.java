@@ -1,7 +1,8 @@
-package com.yuntian.androidnewarchitecture.repository.net;
+package com.yuntian.androidnewarchitecture.repository;
 
 import com.yuntian.androidnewarchitecture.bean.GankInfo;
 import com.yuntian.androidnewarchitecture.net.service.GankService;
+import com.yuntian.androidnewarchitecture.contract.GankContract;
 import com.yuntian.baselibs.data.BaseResult;
 import com.yuntian.baselibs.lifecycle.BaseRepository;
 import com.yuntian.baselibs.lifecycle.BaseResultLiveData;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-public class GankRepository extends BaseRepository<GankService> implements IGankData {
+public class GankRepository extends BaseRepository<GankService> implements GankContract {
 
     private static final String TAG = "GankRepository";
 
