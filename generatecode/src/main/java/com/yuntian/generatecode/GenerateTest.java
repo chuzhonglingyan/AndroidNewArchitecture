@@ -5,7 +5,12 @@ import org.junit.Test;
 import java.io.File;
 
 import static com.yuntian.generatecode.ProjectConstant.BASE_PACKAGE;
-import static com.yuntian.generatecode.ProjectConstant.CONTRACT_PACKAGE;
+
+/**
+ * @author   chulingyan
+ * @time     2018/12/7  0:11
+ * @see {https://www.jianshu.com/p/ff0c265d7623}
+ */
 
 public class GenerateTest {
 
