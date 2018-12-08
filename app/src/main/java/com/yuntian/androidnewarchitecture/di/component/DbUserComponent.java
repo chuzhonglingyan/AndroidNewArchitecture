@@ -1,7 +1,7 @@
 package com.yuntian.androidnewarchitecture.di.component;
 
 import com.yuntian.androidnewarchitecture.di.module.DbUserModule;
-import com.yuntian.androidnewarchitecture.ui.DbTestActivity;
+import com.yuntian.androidnewarchitecture.ui.activity.DbTestActivity;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.di.scope.ActivityScope;
 

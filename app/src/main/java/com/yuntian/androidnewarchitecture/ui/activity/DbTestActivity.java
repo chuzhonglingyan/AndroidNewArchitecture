@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.ui;
+package com.yuntian.androidnewarchitecture.ui.activity;
 
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -12,10 +12,10 @@ import com.yuntian.androidnewarchitecture.db.entity.User;
 import com.yuntian.androidnewarchitecture.di.component.DaggerDbUserComponent;
 import com.yuntian.androidnewarchitecture.di.module.DbUserModule;
 import com.yuntian.androidnewarchitecture.viewmodel.DbViewModel;
+import com.yuntian.baselibs.work.MathWorker;
 import com.yuntian.baselibs.base.BaseActivity;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.util.GsonUtil;
-import com.yuntian.baselibs.work.CompressWorker;
 import com.yuntian.baselibs.work.WorkManagerUtil;
 
 import java.util.Random;
@@ -24,7 +24,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 
 import androidx.work.Data;
-import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkRequest;
 
 public class DbTestActivity extends BaseActivity {
 
@@ -132,17 +132,17 @@ public class DbTestActivity extends BaseActivity {
             }));
             testRestore.setTextColor(Color.BLUE);
             Data myData = new Data.Builder()
-                    .putLong(CompressWorker.KEY_X_ARG, 42)
-                    .putLong(CompressWorker.KEY_Y_ARG, 421)
-                    .putLong(CompressWorker.KEY_Z_ARG, 5666)
+                    .putLong(MathWorker.KEY_X_ARG, 42)
+                    .putLong(MathWorker.KEY_Y_ARG, 421)
+                    .putLong(MathWorker.KEY_Z_ARG, 5666)
                     .build();
-            OneTimeWorkRequest compressWorkerRequest= WorkManagerUtil.startOneTimeWorkRequest(CompressWorker.class,myData);
+            WorkRequest compressWorkerRequest= WorkManagerUtil.startOneTimeWorkRequest(MathWorker.class,myData);
 
             WorkManagerUtil.observe(this,compressWorkerRequest.getId(), workInfo -> {
                 // Do something with the status
                 if (workInfo != null && workInfo.getState().isFinished()) {
                     // ...
-                    LogUtils.d( "workInfo:" + workInfo.getOutputData().getInt(CompressWorker.KEY_RESULT,0));
+                    LogUtils.d( "workInfo:" + workInfo.getOutputData().getInt(MathWorker.KEY_RESULT,0));
                 }
             });
         });

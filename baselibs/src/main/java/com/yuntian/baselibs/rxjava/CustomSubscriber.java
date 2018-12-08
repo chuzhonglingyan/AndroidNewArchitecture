@@ -17,7 +17,21 @@ import retrofit2.HttpException;
 
 public abstract class CustomSubscriber<T> extends DisposableSubscriber<T> {
 
+    private RxManager rxManager;
 
+    public CustomSubscriber() {
+        this(null);
+    }
+    public CustomSubscriber(RxManager rxManager) {
+        this.rxManager=rxManager;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (rxManager!=null){
+            rxManager.add(this);
+        }
+    }
 
     @Override
     public void onComplete() {

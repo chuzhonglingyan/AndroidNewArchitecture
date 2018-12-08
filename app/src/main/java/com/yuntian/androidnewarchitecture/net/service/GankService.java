@@ -6,7 +6,6 @@ import com.yuntian.baselibs.data.BaseResult;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 

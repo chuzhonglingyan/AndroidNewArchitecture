@@ -2,8 +2,8 @@ package com.yuntian.androidnewarchitecture.di.component;
 
 import com.yuntian.androidnewarchitecture.di.module.ApiServiceModule;
 import com.yuntian.androidnewarchitecture.di.module.UserModule;
-import com.yuntian.androidnewarchitecture.ui.UserProfileFragmentA;
-import com.yuntian.androidnewarchitecture.ui.UserProfileFragmentB;
+import com.yuntian.androidnewarchitecture.ui.fragment.UserProfileFragmentA;
+import com.yuntian.androidnewarchitecture.ui.fragment.UserProfileFragmentB;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.di.scope.ActivityScope;
 

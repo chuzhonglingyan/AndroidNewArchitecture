@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by long on 2016/6/28.
@@ -29,7 +31,7 @@ public class AssetsHelper {
             byte[] bytes = new byte[inStream.available()];  //inStream.available()为文件中的总byte数
             inStream.read(bytes);
             inStream.close();
-            data = new String(bytes, "utf-8");        //将bytes转为utf-8字符串
+            data = new String(bytes, Charset.forName("UTF-8"));        //将bytes转为utf-8字符串
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,12 +1,12 @@
-package ${basePackageName}.contract;
+package ${basePackageName}.net.service;
+
 
 /**
  * @author   ${author}
  * @time     ${date}
  * @describe ${describe}
  */
-public interface ${modelNameUpperCamel}Contract {
-
+public interface ${modelNameUpperCamel}Service {
 
 
 

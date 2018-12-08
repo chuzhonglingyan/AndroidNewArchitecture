@@ -36,13 +36,14 @@ public abstract class BaseFragment extends Fragment implements LifecycleOwner,IV
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        initListener();
     }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData(savedInstanceState);
+        initData(savedInstanceState==null,savedInstanceState);
     }
 
     protected abstract int getLayoutId();
@@ -66,7 +67,9 @@ public abstract class BaseFragment extends Fragment implements LifecycleOwner,IV
 
     protected abstract void  initView();
 
-    protected abstract void  initData(Bundle savedInstanceState);
+    protected abstract void initListener();
+
+    protected abstract void initData(boolean isInit,@Nullable Bundle savedInstanceState);
 
 
 

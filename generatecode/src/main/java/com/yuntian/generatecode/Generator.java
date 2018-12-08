@@ -28,32 +28,60 @@ public class Generator {
     public void generate(File outDirFile, String packageName, String modelName) {
         try {
             generateContact(outDirFile, packageName, modelName);
+            generateService(outDirFile, packageName, modelName);
+            generateRepository(outDirFile, packageName, modelName);
+            generateViewModel(outDirFile, packageName, modelName);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void generateContact(File outDirFile, String packageName, String modelName) throws Exception {
+    public void generateContact(File outDirFile, String basePackageName, String modelName) throws Exception {
         Configuration config = getConfiguration("contract.ftl");
         Template javaFileFtl = config.getTemplate("contract.ftl");
-        generate(javaFileFtl, outDirFile, packageName+".contract", modelName,"contract");
+        generate(javaFileFtl, outDirFile,basePackageName, basePackageName+".contract", modelName,"contract");
     }
 
-    private void generate(Template javaFileFtl, File outDirFile, String packageName, String modelName,String  tagName) throws Exception {
+    public void generateService(File outDirFile, String basePackageName, String modelName) throws Exception {
+        Configuration config = getConfiguration("service.ftl");
+        Template javaFileFtl = config.getTemplate("service.ftl");
+        generate(javaFileFtl, outDirFile, basePackageName,basePackageName+".net.service", modelName,"service");
+    }
+
+    public void generateRepository(File outDirFile, String basePackageName,String modelName) throws Exception {
+        Configuration config = getConfiguration("repository.ftl");
+        Template javaFileFtl = config.getTemplate("repository.ftl");
+        generate(javaFileFtl, outDirFile,basePackageName, basePackageName+".repository", modelName,"repository");
+    }
+
+
+    public void generateViewModel(File outDirFile, String basePackageName,String modelName) throws Exception {
+        Configuration config = getConfiguration("viewmodel.ftl");
+        Template javaFileFtl = config.getTemplate("viewmodel.ftl");
+        generate(javaFileFtl, outDirFile,basePackageName, basePackageName+".viewmodel", modelName,"ViewModel",false);
+    }
+
+    private void generate(Template javaFileFtl, File outDirFile,String basePackageName, String packageName, String modelName,String  tagName ) throws Exception {
+        generate( javaFileFtl,  outDirFile, basePackageName,  packageName,  modelName,  tagName, true);
+    }
+    private void generate(Template javaFileFtl, File outDirFile,String basePackageName, String packageName, String modelName,String  tagName,boolean flag) throws Exception {
 //        // 创建数据模型
-        String clazzName = tableNameConvertUpperCamel(modelName)+tableNameConvertUpperCamel(tagName);
+        String clazzName="";
+        if (flag){
+            clazzName = tableNameConvertUpperCamel(modelName)+tableNameConvertUpperCamel(tagName);
+        }else {
+            clazzName = tableNameConvertUpperCamel(modelName)+tagName;
+        }
 
         // 创建数据模型
         Map<String, Object> root = new HashMap<>();
         root.put("author", GenerateClass.AUTHOR);
         root.put("date", GenerateClass.DATE);
         root.put("describe", "接口约束");
-        ParametersBean testBean = new ParametersBean();
-        testBean.setPackageName(packageName);
-        testBean.setClazzName(clazzName);
-        root.put(BEAN_KEY, testBean);
+        root.put("modelNameUpperCamel", tableNameConvertUpperCamel(modelName));
+        root.put("basePackageName",basePackageName);
 
-        File file = toJavaFilename(outDirFile, testBean.getPackageName(), testBean.getClazzName());
+        File file = toJavaFilename(outDirFile, packageName, clazzName);
         //noinspection ResultOfMethodCallIgnored
         file.getParentFile().mkdirs();
         Writer writer = new FileWriter(file);

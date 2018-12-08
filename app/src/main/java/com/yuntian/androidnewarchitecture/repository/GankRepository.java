@@ -26,7 +26,7 @@ public class GankRepository extends BaseRepository<GankService> implements GankC
     public BaseResultLiveData<List<GankInfo>> getGankInfoList(String dataType, int page) {
         final BaseResultLiveData<List<GankInfo>> data = BaseResultLiveData.newIntance();
         Flowable<List<GankInfo>> flowable = service.getGankInfoList(dataType, page).compose(RxHandleResult.handleFlowableResult());
-        flowable.subscribe(new CustomSubscriber<List<GankInfo>>() {
+        flowable.subscribe(new CustomSubscriber<List<GankInfo>>(getRxManager()) {
             @Override
             public void onResponse(BaseResult<List<GankInfo>> baseResult) {
                 data.setValue(baseResult);

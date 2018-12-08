@@ -1,4 +1,4 @@
-package com.yuntian.androidnewarchitecture.ui;
+package com.yuntian.androidnewarchitecture.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.R;
+import com.yuntian.androidnewarchitecture.ui.fragment.UserProfileFragmentA;
+import com.yuntian.androidnewarchitecture.ui.fragment.UserProfileFragmentB;
 import com.yuntian.baselibs.base.BaseActivity;
 import com.yuntian.baselibs.di.component.AppComponent;
 

@@ -1,13 +1,12 @@
-package com.yuntian.baselibs.work;
+package com.yuntian.androidnewarchitecture.work;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-
 import com.blankj.utilcode.util.LogUtils;
+import com.yuntian.androidnewarchitecture.base.App;
 
 import androidx.work.Data;
-import androidx.work.ListenableWorker;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -16,7 +15,7 @@ import androidx.work.WorkerParameters;
  * @time 2018/12/05 23:41
  * @describe
  */
-public class CompressWorker extends Worker {
+public class PhotoCheckWorker extends Worker {
 
     // Define the parameter keys:
     public static final String KEY_X_ARG = "X";
@@ -28,7 +27,7 @@ public class CompressWorker extends Worker {
 
 
 
-    public CompressWorker(
+    public PhotoCheckWorker(
             @NonNull Context context,
             @NonNull WorkerParameters params) {
         super(context, params);
@@ -36,19 +35,15 @@ public class CompressWorker extends Worker {
 
     @NonNull
     @Override
-    public Worker.Result doWork() {
+    public Result doWork() {
 
         // Fetch the arguments (and specify default values):
         long x = getInputData().getLong(KEY_X_ARG, 0);
         long y =getInputData().getLong(KEY_Y_ARG, 0);
         long z = getInputData().getLong(KEY_Z_ARG, 0);
-        LogUtils.d(Thread.currentThread().getName());
         long timeToSleep = x  + y + z;
-        try {
-            Thread.sleep(timeToSleep);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        LogUtils.d("taskId:"+ App.getPhotoCheckRequestWorkeId().toString()+",执行周期性任务");
         //...set the output, and we're done!
         Data output = new Data.Builder()
                 .putInt(KEY_RESULT, (int) timeToSleep)
@@ -57,7 +52,7 @@ public class CompressWorker extends Worker {
         setOutputData(output);
 
         // Indicate success or failure with your return value.
-        return Worker.Result.SUCCESS;
+        return Result.SUCCESS;
     }
 
 }

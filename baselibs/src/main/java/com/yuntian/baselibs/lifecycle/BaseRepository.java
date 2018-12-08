@@ -20,7 +20,9 @@ public abstract class BaseRepository<T> {
     }
 
     public void  onCleared(){
-        rxManager.clear();
+        if (rxManager!=null){
+            rxManager.clear();
+        }
     }
 
 }
