@@ -1,11 +1,11 @@
 package com.yuntian.androidnewarchitecture.work;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.base.App;
 
+import androidx.annotation.NonNull;
 import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;

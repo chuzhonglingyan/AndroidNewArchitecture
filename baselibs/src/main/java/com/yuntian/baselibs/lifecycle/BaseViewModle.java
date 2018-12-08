@@ -1,8 +1,9 @@
 package com.yuntian.baselibs.lifecycle;
 
-import android.arch.lifecycle.ViewModel;
 
 import com.blankj.utilcode.util.LogUtils;
+
+import androidx.lifecycle.ViewModel;
 
 public abstract class BaseViewModle<T extends BaseRepository> extends ViewModel {
 

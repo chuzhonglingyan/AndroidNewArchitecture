@@ -1,11 +1,10 @@
 package com.yuntian.baselibs.lifecycle;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.NonNull;
-
 import com.yuntian.baselibs.data.BaseResult;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 public  class BaseResultLiveData<T> extends MutableLiveData<BaseResult<T>> {
 
@@ -16,7 +15,7 @@ public  class BaseResultLiveData<T> extends MutableLiveData<BaseResult<T>> {
 
 
 
-    public void observe2(@NonNull LifecycleOwner owner,SucessCallBack<T> sucessCallBack ){
+    public void observe2(@NonNull LifecycleOwner owner, SucessCallBack<T> sucessCallBack ){
         observe2(owner,sucessCallBack,null);
     }
 
@@ -36,11 +35,12 @@ public  class BaseResultLiveData<T> extends MutableLiveData<BaseResult<T>> {
             });
     }
 
-
     @Override
-    public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<BaseResult<T>> observer) {
+    public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super BaseResult<T>> observer) {
         super.observe(owner, observer);
     }
+
+
 
 
     public  interface SucessCallBack<T>{

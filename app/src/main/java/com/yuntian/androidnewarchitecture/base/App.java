@@ -1,7 +1,9 @@
 package com.yuntian.androidnewarchitecture.base;
 
+
+import android.content.Context;
+
 import com.blankj.utilcode.util.LogUtils;
-import com.facebook.stetho.Stetho;
 import com.yuntian.androidnewarchitecture.db.AppDatabase;
 import com.yuntian.androidnewarchitecture.work.PhotoCheckWorker;
 import com.yuntian.baselibs.base.BaseApp;
@@ -9,7 +11,7 @@ import com.yuntian.baselibs.work.WorkManagerUtil;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
+import androidx.multidex.MultiDex;
 import androidx.work.Data;
 import androidx.work.WorkRequest;
 
@@ -24,7 +26,6 @@ public class App extends BaseApp {
 
     @Override
     protected void initMain() {
-        Stetho.initializeWithDefaults(this);
         appDatabase = AppDatabase.getInstance(this);
         LogUtils.d("App启动了");
         startBackgoundTask();
@@ -53,6 +54,13 @@ public class App extends BaseApp {
 
     public static UUID getPhotoCheckRequestWorkeId() {
         return photoCheckRequestWorkeId;
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
     }
 
 }

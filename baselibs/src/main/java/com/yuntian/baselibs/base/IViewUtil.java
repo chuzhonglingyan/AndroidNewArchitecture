@@ -1,10 +1,11 @@
 package com.yuntian.baselibs.base;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 
 public class IViewUtil {
 
@@ -12,8 +13,8 @@ public class IViewUtil {
     public static <T extends ViewModel> T getViewModule(IView iView, Class<T> modelClass) {
         if (iView instanceof Fragment) {
             return ViewModelProviders.of((Fragment) iView).get(modelClass);
-        } else if (iView instanceof FragmentActivity) {
-            return ViewModelProviders.of((FragmentActivity) iView).get(modelClass);
+        } else if (iView instanceof AppCompatActivity) {
+            return ViewModelProviders.of((AppCompatActivity) iView).get(modelClass);
         } else {
             return create(modelClass);
         }

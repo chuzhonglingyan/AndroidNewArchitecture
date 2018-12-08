@@ -1,10 +1,10 @@
 package com.yuntian.baselibs.net;
 
-import android.support.annotation.NonNull;
 
 import com.yuntian.baselibs.data.BaseResult;
 import com.yuntian.baselibs.exception.ServerException;
 
+import androidx.annotation.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.HttpException;

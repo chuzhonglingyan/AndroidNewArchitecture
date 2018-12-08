@@ -1,9 +1,6 @@
 package com.yuntian.androidnewarchitecture.ui.fragment;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -18,6 +15,10 @@ import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.util.GsonUtil;
 
 import javax.inject.Inject;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class UserProfileFragmentA extends BaseFragment {
 
@@ -77,7 +78,7 @@ public class UserProfileFragmentA extends BaseFragment {
             }));
 
 
-            gankViewModel.getGankInfoList("福利",1).observe2(this, result -> {
+            gankViewModel.getGankInfoList("福利", 1).observe2(this, result -> {
                 Log.d(TAG, GsonUtil.toJson(result));
             }, ((msg, code) -> {
 
@@ -86,7 +87,7 @@ public class UserProfileFragmentA extends BaseFragment {
 
 
         });
-        mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
+        mCommunicateViewModel = ViewModelProviders.of(activity).get(CommunicateViewModel.class);
 
         if (getArguments() != null) {
             userId = getArguments().getString(UID_KEY);

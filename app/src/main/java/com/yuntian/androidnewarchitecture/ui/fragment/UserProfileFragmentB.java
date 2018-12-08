@@ -1,9 +1,6 @@
 package com.yuntian.androidnewarchitecture.ui.fragment;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,6 +14,9 @@ import com.yuntian.baselibs.base.BaseFragment;
 import com.yuntian.baselibs.di.component.AppComponent;
 
 import javax.inject.Inject;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 
 public class UserProfileFragmentB extends BaseFragment {
 
@@ -70,7 +70,7 @@ public class UserProfileFragmentB extends BaseFragment {
             gitHubViewModel.init(userId);
         }
 
-        mCommunicateViewModel = ViewModelProviders.of((FragmentActivity) activity).get(CommunicateViewModel.class);
+        mCommunicateViewModel = ViewModelProviders.of( activity).get(CommunicateViewModel.class);
 
         mCommunicateViewModel.getName().observe(this, name ->
                 Log.d(TAG, "来自A的问候" + name));

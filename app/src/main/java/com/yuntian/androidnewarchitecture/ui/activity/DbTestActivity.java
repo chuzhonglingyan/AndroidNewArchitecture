@@ -3,7 +3,6 @@ package com.yuntian.androidnewarchitecture.ui.activity;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -23,6 +22,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.work.Data;
 import androidx.work.WorkRequest;
 

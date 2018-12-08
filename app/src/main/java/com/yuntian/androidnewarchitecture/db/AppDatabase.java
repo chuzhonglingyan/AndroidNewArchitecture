@@ -1,19 +1,19 @@
 package com.yuntian.androidnewarchitecture.db;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
-import android.arch.persistence.room.migration.Migration;
-import android.content.Context;
-import android.support.annotation.NonNull;
 
+import android.content.Context;
 import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.db.dao.EventLogDao;
 import com.yuntian.androidnewarchitecture.db.dao.UserDao;
 import com.yuntian.androidnewarchitecture.db.entity.EventLog;
 import com.yuntian.androidnewarchitecture.db.entity.User;
+import androidx.annotation.NonNull;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import static com.yuntian.androidnewarchitecture.db.AppDatabase.currentV;
 

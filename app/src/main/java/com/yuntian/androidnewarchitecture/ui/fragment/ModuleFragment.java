@@ -1,12 +1,12 @@
 package com.yuntian.androidnewarchitecture.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.yuntian.androidnewarchitecture.R;
-import com.yuntian.baselibs.base.BaseActivity;
 import com.yuntian.baselibs.base.BaseFragment;
 import com.yuntian.baselibs.di.component.AppComponent;
+
+import androidx.annotation.Nullable;
 
 public class ModuleFragment extends BaseFragment {
 

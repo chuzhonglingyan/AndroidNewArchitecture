@@ -2,8 +2,7 @@ package com.yuntian.androidnewarchitecture.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
+
 
 import com.blankj.utilcode.util.LogUtils;
 import com.yuntian.androidnewarchitecture.R;
@@ -11,6 +10,9 @@ import com.yuntian.androidnewarchitecture.ui.fragment.UserProfileFragmentA;
 import com.yuntian.androidnewarchitecture.ui.fragment.UserProfileFragmentB;
 import com.yuntian.baselibs.base.BaseActivity;
 import com.yuntian.baselibs.di.component.AppComponent;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends BaseActivity {
 
