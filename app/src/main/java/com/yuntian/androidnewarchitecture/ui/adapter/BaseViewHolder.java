@@ -1,9 +1,11 @@
 package com.yuntian.androidnewarchitecture.ui.adapter;
 
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder  {
 
+
+
+    private SparseArray<View> viewSparseArray=new SparseArray<>();
 
     public static <T> BaseViewHolder<T> createViewHolder(@NonNull ViewGroup parent, int viewType){
         View itemView = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
@@ -30,6 +35,15 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder  {
 
     abstract     void clear();
 
-
+    public <V extends View> V  getView(@IdRes int id){
+        View view = viewSparseArray.get(id);
+        if (view == null) {
+            view = itemView.findViewById(id);
+            if (view != null) {
+                viewSparseArray.put(id, view);
+            }
+        }
+        return (V) view;
+    }
 
 }

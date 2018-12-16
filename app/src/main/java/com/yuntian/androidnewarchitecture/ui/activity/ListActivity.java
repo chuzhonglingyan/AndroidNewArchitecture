@@ -1,17 +1,23 @@
 package com.yuntian.androidnewarchitecture.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.yuntian.androidnewarchitecture.R;
+import com.yuntian.androidnewarchitecture.db.entity.User;
 import com.yuntian.androidnewarchitecture.di.component.DaggerDbListComponent;
 import com.yuntian.androidnewarchitecture.di.module.DbUserModule;
+import com.yuntian.androidnewarchitecture.ui.adapter.OnItemClickListener;
 import com.yuntian.androidnewarchitecture.ui.adapter.UserAdapter;
 import com.yuntian.androidnewarchitecture.viewmodel.DbViewModel;
 import com.yuntian.baselibs.base.BaseActivity;
 import com.yuntian.baselibs.di.component.AppComponent;
 import com.yuntian.baselibs.util.GsonUtil;
+
 import javax.inject.Inject;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,18 +54,22 @@ public class ListActivity extends BaseActivity {
         mSwRefresh.setProgressViewOffset(true, 0, 100);//设置加载圈是否有缩放
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mSwRefresh.setRefreshing(true);
+        mAdapter = new UserAdapter();
+        mRv.setAdapter(mAdapter);
     }
 
     @Override
     protected void initListener() {
         //下拉刷新
         mSwRefresh.setOnRefreshListener(this::refreshData);
+        mAdapter.setOnItemClickListener((view, user, position) -> {
+            ToastUtils.showShort("点击了"+position+","+user.getId());
+        });
     }
 
     @Override
     protected void initData(boolean isInit, @Nullable Bundle savedInstanceState) {
-        mAdapter = new UserAdapter();
-        mRv.setAdapter(mAdapter);
+
         refreshData();
     }
 
