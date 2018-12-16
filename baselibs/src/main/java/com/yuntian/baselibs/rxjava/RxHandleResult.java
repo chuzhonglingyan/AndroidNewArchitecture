@@ -38,6 +38,17 @@ public class RxHandleResult {
                 });
     }
 
+    /**
+     * @param <T>
+     * @return
+     */
+    public static <T> FlowableTransformer<T, T> handleDbFlowableResultTest() {
+        return upstream -> upstream.to((Function<Flowable<T>, Publisher<T>>) baseResultFlowable -> {
+                    return baseResultFlowable.flatMap((Function<T, Publisher<T>>) RxHandleResult::createFlowableDbData);
+                });
+    }
+
+
 
     /**
      * 对服务器返回数据进行预处理
@@ -57,6 +68,27 @@ public class RxHandleResult {
                     });
                 });
     }
+
+    /**
+     * 接受数据完成
+     *
+     * @param data
+     * @param <T>
+     * @return
+     */
+    private static <T> Flowable<T> createFlowableDbData(final T data) {
+        return Flowable.create(emitter -> {
+            try {
+                emitter.onNext(data);
+                emitter.onComplete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, BackpressureStrategy.LATEST);
+    }
+
+
+
 
     /**
      * 接受数据完成

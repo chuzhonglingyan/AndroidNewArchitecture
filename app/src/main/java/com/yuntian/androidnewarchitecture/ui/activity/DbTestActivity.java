@@ -113,7 +113,11 @@ public class DbTestActivity extends BaseActivity {
             User user=new User();
             user.setUserName("用户"+ UUID.randomUUID().toString().substring(0,4));
             user.setAge(random.nextInt(40-10)+10);
-            dbViewModel.insertAll(user);
+            try {
+                dbViewModel.insertAll(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         tvDelete.setOnClickListener(v->{

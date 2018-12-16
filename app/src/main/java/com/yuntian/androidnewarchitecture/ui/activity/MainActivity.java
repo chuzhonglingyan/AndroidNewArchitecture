@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
             fragmentTransaction.commit();
         });
         findViewById(R.id.tv_goto_db).setOnClickListener(v->{
-            startActivity(new Intent(context,DbTestActivity.class));
+            startActivity(new Intent(context,ListActivity.class));
         });
     }
 

@@ -1,11 +1,11 @@
 package com.yuntian.androidnewarchitecture.db.dao;
 
 
-
 import com.yuntian.androidnewarchitecture.db.entity.User;
 
 import java.util.List;
 
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,6 +19,9 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     Flowable<List<User>> getAll();
 
+
+    @Query("select * from user  order by id ASC")
+    DataSource.Factory<Integer, User> getUserPageList();
 
 
     @Query("SELECT * FROM user WHERE id IN (:userIds)")

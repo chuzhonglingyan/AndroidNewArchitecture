@@ -133,6 +133,8 @@ kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
 deps.kotlin = kotlin
 
 deps.paging_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging"
+deps.paging= "androidx.paging:paging-runtime:$versions.paging"
+deps.paging_rxjava2 = "androidx.paging:paging-rxjava2:$versions.paging"
 
 def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
