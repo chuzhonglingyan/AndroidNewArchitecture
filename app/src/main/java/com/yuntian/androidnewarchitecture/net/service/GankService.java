@@ -1,10 +1,13 @@
 package com.yuntian.androidnewarchitecture.net.service;
 
 import com.yuntian.androidnewarchitecture.bean.GankInfo;
+import com.yuntian.androidnewarchitecture.ui.page.NetPageKeyedDataSource;
 import com.yuntian.baselibs.data.BaseResult;
 
 import java.util.List;
 
+import androidx.paging.DataSource;
+import androidx.paging.PagedList;
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -20,4 +23,10 @@ public interface GankService {
      */
     @GET("https://gank.io/api/data/{dataType}/10/{page}")
     Flowable<BaseResult<List<GankInfo>>> getGankInfoList(@Path("dataType") String dataType, @Path("page") int page);
+
+
+    @GET("https://gank.io/api/data/{dataType}/{pageSize}/{page}")
+    Flowable<BaseResult<List<GankInfo>>> getGankInfoPageList(@Path("dataType") String dataType, @Path("pageSize") int pageSize, @Path("page") int page);
+
+
 }

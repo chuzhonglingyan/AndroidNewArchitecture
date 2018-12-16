@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ui.activity.DbTestActivity"/>
         <activity android:name=".ui.activity.ListActivity"/>
+        <activity android:name=".ui.activity.NetListActivity"/>
     </application>
 
 </manifest>

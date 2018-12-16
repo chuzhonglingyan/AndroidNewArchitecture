@@ -8,16 +8,20 @@ import com.yuntian.baselibs.lifecycle.BaseViewModle;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
+
 
 public class GankViewModel extends BaseViewModle<GankRepository> implements GankContract {
 
 
-
     @Override
     public BaseResultLiveData<List<GankInfo>> getGankInfoList(String dataType, int page) {
-        return repo.getGankInfoList(dataType,page);
+        return repo.getGankInfoList(dataType, page);
     }
 
 
-
+    public LiveData<PagedList<GankInfo>> getGankInfoPageList(String dataType) {
+        return repo.getGankInfoPageList(dataType);
+    }
 }
